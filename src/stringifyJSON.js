@@ -18,8 +18,6 @@ var stringifyJSON = function(obj) {
     // join mapped array
     return '[' + result.join(",") + ']';
   }
-  
-
   if (Object.prototype.toString.call(obj) === '[object Object]') {
     let result = [];
     for (let key in obj) {
@@ -35,7 +33,6 @@ var stringifyJSON = function(obj) {
     // join result array
     return '{' + result.join(",") + '}';
   }
-
   // surround strings with quotes
   if (typeof obj === 'string') {
     return '"' + obj + '"';
