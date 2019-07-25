@@ -3,7 +3,6 @@
 
 // but you're not, so you'll write it from scratch:
 var parseJSON = function(json) {
-  // debugger;
   var parseObj = function (objJSON) {
     if (objJSON === '{}') {
       return {};
@@ -103,6 +102,7 @@ var parseJSON = function(json) {
   };
 
   var parseArr = function (arrJSON) {
+
     if (arrJSON === '[]') {
       return [];
     }
@@ -122,13 +122,16 @@ var parseJSON = function(json) {
     let position;
     
     while (copy.length > 0) {
+      // set or reset position to zero
+      position = 0;
       // trim the string
       copy = copy.trim();
       // if double quotes next (ie, value is a string)
       if (copy[0] === '"') {
         // find position of the first comma after the next non escaped double quotes
         do {
-          position = copy.indexOf('"', 1);
+          ++position;
+          position = copy.indexOf('"', position);
         } while (copy[position - 1] === '\\');
         // position is currently the last quote of the string, so increment to the next character (the comma)
         position = position + 1;
