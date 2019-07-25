@@ -69,7 +69,7 @@ parseableStrings = [
   // '["\\r"]', ??
   // '["\\t"]',
   // '["\\\\"]',
-  '["howdy!\\r"this is on a new line!"]',
+  '["howdy!\\rthis is on a new line!"]',
   '["h\\\\ihe\\\\ll\\\\o"]',
   '["\\\\ihe\\\\ll\\\\o"]',
   '["a\\\\good"]',
