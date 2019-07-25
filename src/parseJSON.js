@@ -113,15 +113,8 @@ var parseJSON = function(json) {
     let position;
     
     while (copy.length > 0) {
-      // // find the position of the first colon
-      // firstColonIndex = copy.indexOf(':');
-      // // recursive call on all characters before the first colon (trimmed first), save as key
-      // key = parseJSON(copy.slice(0, firstColonIndex).trim());
-      // // remove all characters up to and including the colon
-      // copy = copy.slice(firstColonIndex + 1);
-      // // trim the string
-      // copy = copy.trim();
-
+      // trim the string
+      copy = copy.trim();
       // if double quotes next (ie, value is a string)
       if (copy[0] === '"') {
         // find position of the first comma after the next non escaped double quotes
@@ -190,18 +183,6 @@ var parseJSON = function(json) {
     }
 
     return result;
-
-    // // split string on commas to create an actual array ???doesn't work if there are nested arrays / objects???
-    // const arrOfValues = arrJSON.split(',');
-    // // return reduction of recursive calls through array
-    // return arrOfValues.reduce((acc, currentValue) => {
-    //   // trim the currentValue
-    //   currentValue = currentValue.trim();
-    //   // push each cb return value onto accumulator array
-    //   acc.push(parseJSON(currentValue));
-    //   return acc;
-    // }, []);
-    
   };
   
   var parseNum = function (numJSON) {

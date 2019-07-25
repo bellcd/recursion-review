@@ -66,7 +66,7 @@ parseableStrings = [
   // '["\\\\\\"\\"a\\""]',
   // '["and you can\'t escape thi\s"]', // why does \\ in JSON.stringify show up in the stringified string as \\ ?? (instead of consuming into one backslash \)
 
-  // // everything all at once
+  // everything all at once
   '{"CoreletAPIVersion":2,"CoreletType":"standalone",' +
     '"documentation":"A corelet that provides the capability to upload' +
     ' a folderâ€™s contents into a userâ€™s locker.","functions":[' +
@@ -96,12 +96,12 @@ parseableStrings = [
     '"name":"LockerUploader","version":{"major":0,' +
     '"micro":1,"minor":0},"versionString":"0.0.1"}',
 
-  // '{ "firstName": "John", "lastName" : "Smith", "age" : ' +
-  //   '25, "address" : { "streetAddress": "21 2nd Street", ' +
-  //   '"city" : "New York", "state" : "NY", "postalCode" : ' +
-  //   ' "10021" }, "phoneNumber": [ { "type" : "home", ' +
-  //   '"number": "212 555-1234" }, { "type" : "fax", ' +
-  //   '"number": "646 555-4567" } ] }',
+  '{ "firstName": "John", "lastName" : "Smith", "age" : ' +
+    '25, "address" : { "streetAddress": "21 2nd Street", ' +
+    '"city" : "New York", "state" : "NY", "postalCode" : ' +
+    ' "10021" }, "phoneNumber": [ { "type" : "home", ' +
+    '"number": "212 555-1234" }, { "type" : "fax", ' +
+    '"number": "646 555-4567" } ] }',
 
   // '{\r\n' +
   //   '          "glossary": {\n' +
