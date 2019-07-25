@@ -3,6 +3,7 @@
 
 // but you're not, so you'll write it from scratch:
 var parseJSON = function(json) {
+  debugger;
   var parseObj = function (objJSON) {
     if (objJSON === '{}') {
       return {};
@@ -199,57 +200,55 @@ var parseJSON = function(json) {
   
   var parseStr = function (strJSON) {
     let copy = strJSON.slice(1, -1);
-    return copy;
 
-    // how to deal with escaped characters??
+    // console.log(copy);
+    // if (copy === '\\"hi') console.log('YES');
 
-    // let needToTest = false;
-    // let replaceWith;
-    // for (let i = 0; i < copy.length; i++) {
-    //   needToTest = false;
-    //   switch (copy[i]) {
-    //     case "'":
-    //     needToTest = true;
-    //     replaceWith = "'";
-    //     break;
-    //     case '"':
-    //     needToTest = true;
-    //     replaceWith = '"';
-    //     break;
-    //     case '\\':
-    //     needToTest = true;
-    //     replaceWith = '\\';
-    //     break;
-    //     case 'n':
-    //     needToTest = true;
-    //     replaceWith = `\n`;
-    //     break;
-    //     case 'r':
-    //     needToTest = true;
-    //     replaceWith = '\r';
-    //     break;
-    //     case 'v':
-    //     needToTest = true;
-    //     replaceWith = '\v';
-    //     break;
-    //     case 't':
-    //     needToTest = true;
-    //     replaceWith = '\t';
-    //     break;
-    //     case 'b':
-    //     needToTest = true;
-    //     replaceWith = '\b';
-    //     break;
-    //     case 'f':
-    //     needToTest = true;
-    //     replaceWith = '\f';
-    //     break;
-    //   }
-    //   if (needToTest && copy[i - 1] === '\\') {
-    //     copy = copy.slice(0, i - 1) + replaceWith + copy.slice(i + 1);
+    // console.log("hello!");
+    // for handling escape characters
+    // only handling characters in English
+    let result = '';
+   
+    // while (copy.length > 0) {
+    //   if (copy.slice(0, 2) === '\\\\') {
+    //     // \
+    //     result = result + '\\';
+    //     console.log('copy.length: ', copy.length);
+    //     copy = copy.slice(2);
+    //     console.log('copy.length: ', copy.length);
+    //     console.log('entering');
+    //   } else if (copy.slice(0, 2) === '\\"') {
+    //     // "
+    //     result = result + '"'
+    //     copy = copy.slice(2);
+    //   } else if (copy.slice(0, 2) === "\\'") {
+    //     // '
+    //     result = result + "'";
+    //     copy = copy.slice(2);
+    //   } else if (copy.slice(0, 2) === '\\/') {
+    //     // /
+    //     result = result + '/';
+    //   } else if (copy.slice(0, 2) === '\\b') {
+    //     // backspace
+    //     result = result + '\\b';
+    //   } else if (copy.slice(0, 2) === '\\f') {
+    //     // formfeed
+    //     result = result + '\\f';
+    //   } else if (copy.slice(0, 2) === '\\n') {
+    //     // linefeed
+    //     result = result + '\\n';
+    //   } else if (copy.slice(0, 2) === '\\r') {
+    //     // carriage return
+    //     result = result + '\\r';
+    //   } else if (copy.slice(0, 2) === '\\t') {
+    //     // horizontal tab
+    //     result = result + '\\t';
+    //   } else {
+    //     result = result + copy.slice(0, 1);
+    //     copy = copy.slice(1);
     //   }
     // }
-    // return copy;
+    return result;
   };
 
   var parseBoolean = function (strJSON) {
