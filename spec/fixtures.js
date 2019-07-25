@@ -57,7 +57,7 @@ parseableStrings = [
   '{"a":[],"c": {}, "b": true}',
   '[[[["foo"]]]]',
 
-  // escaping
+  // // escaping
   '["\\\\\\"\\"a\\""]',
   '["and you can\'t escape thi\s"]',
 

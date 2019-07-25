@@ -16,12 +16,24 @@ var parseJSON = function(json) {
     let objCount = 0;
     // make copy of objJSON
     let copy = objJSON.slice();
+
     // remove whitespace if there's any on the end
     copy = copy.trim();
-    // remove the front and back {}
-    copy = copy.slice(1, -1);
+
+    // remove curly brackets from beginning
+    copy = copy.slice(1);
+
+    // if last character is square bracket, remove it
+    if (copy[copy.length - 1] === '}') {
+      copy = copy.slice(0, -1);
+    } else {
+      // else, throw Syntax Error
+      throw new SyntaxError('unpaired { or }. Check your syntax!');
+    }
+
     // trim whitespace
     copy = copy.trim();
+
     // while copy length is greater than 0
     while (copy.length > 0) {
       // find the position of the first colon
@@ -38,8 +50,14 @@ var parseJSON = function(json) {
         do {
           position = copy.indexOf('"', 1);
         } while (copy[position - 1] === '\\');
-        // position is currently the last quote of the string, so increment to the next character (the comma)
-        position = position + 1;
+        // position is currently the enclosing quote of the string, 
+        // if position is greater than length of the string, throw SyntaxError for unterminated string
+        if (copy[position] === undefined) {
+          throw new SyntaxError('Unterminated string, check your quotes!');
+        } else {
+          // else, increment to the next character (the comma for the next element OR end of string)
+          position = position + 1;
+        }
       } else if (copy[0] === '[') {
         // value is an arr
         ++arrayCount;
@@ -90,6 +108,7 @@ var parseJSON = function(json) {
           position = copy.length;
         }
       }
+
       // set value to the result of a recursive call on the next value portion 
       value = parseJSON(copy.slice(0, position));
       // remove everything in the string up to and including position
@@ -112,8 +131,16 @@ var parseJSON = function(json) {
     // remove whitespace if there's any on the end
     copy = copy.trim();
 
-    // remove square brackets from beginning and end
-    copy = copy.slice(1, -1);
+    // remove square brackets from beginning
+    copy = copy.slice(1);
+
+    // if last character is square bracket, remove it
+    if (copy[copy.length - 1] === ']') {
+      copy = copy.slice(0, -1);
+    } else {
+      // else, throw Syntax Error
+      throw new SyntaxError('Unpaired [ or ]. Check your syntax!');
+    }
 
     let result = [];
     let arrayCount = 0;
@@ -133,8 +160,14 @@ var parseJSON = function(json) {
           ++position;
           position = copy.indexOf('"', position);
         } while (copy[position - 1] === '\\');
-        // position is currently the last quote of the string, so increment to the next character (the comma)
-        position = position + 1;
+        // position is currently the enclosing quote of the string, 
+        // if position is greater than length of the string, throw SyntaxError for unterminated string
+        if (copy[position] === undefined) {
+          throw new SyntaxError('Unterminated string, check your quotes!');
+        } else {
+          // else, increment to the next character (the comma for the next element OR end of string)
+          position = position + 1;
+        }
       } else if (copy[0] === '[') {
         // value is an arr
         ++arrayCount;
@@ -185,6 +218,7 @@ var parseJSON = function(json) {
           position = copy.length;
         }
       }
+
       // set value to the result of a recursive call on the next value portion 
       value = parseJSON(copy.slice(0, position));
       // remove everything in the string up to and including position
