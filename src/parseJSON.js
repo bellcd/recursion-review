@@ -16,6 +16,8 @@ var parseJSON = function(json) {
     let objCount = 0;
     // make copy of objJSON
     let copy = objJSON.slice();
+    // remove whitespace if there's any on the end
+    copy = copy.trim();
     // remove the front and back {}
     copy = copy.slice(1, -1);
     // trim whitespace
@@ -103,8 +105,14 @@ var parseJSON = function(json) {
     if (arrJSON === '[]') {
       return [];
     }
-    // make copy and remove square brackets from beginning and end
-    let copy = arrJSON.slice(1, -1);
+    // make copy 
+    let copy = arrJSON.slice();
+
+    // remove whitespace if there's any on the end
+    copy = copy.trim();
+
+    // remove square brackets from beginning and end
+    copy = copy.slice(1, -1);
 
     let result = [];
     let arrayCount = 0;
