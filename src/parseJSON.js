@@ -60,8 +60,6 @@ var parseJSON = function(json) {
           }
           ++position;
         } while ((arrayCount > 0 || objCount > 0 ) && position < objJSONCopy.length);
-        // position is at the closing array bracket, so the next char should be comma or end of string
-        ++position;
       } else if (objJSONCopy[0] === '{') {
         // value is an obj
         ++objCount;
@@ -83,8 +81,6 @@ var parseJSON = function(json) {
           }
           ++position;
         } while ((arrayCount > 0 || objCount > 0 ) && position < objJSONCopy.length);
-        // position is at the closing obj bracket, so the next char should be comma or end of string
-        ++position;
       } else {
         // else find the position of the next comma
         position = objJSONCopy.indexOf(',');

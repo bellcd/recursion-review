@@ -51,11 +51,11 @@ parseableStrings = [
   '{"boolean, true": true, "boolean, false": false, "null": null }',
 
   // // basic nesting
-  // '{"a":{"b":"c"}}',
-  // '{"a":["b", "c"]}',
-  // '[{"a":"b"}, {"c":"d"}]',
-  // '{"a":[],"c": {}, "b": true}',
-  // '[[[["foo"]]]]',
+  '{"a":{"b":"c"}}',
+  '{"a":["b", "c"]}',
+  '[{"a":"b"}, {"c":"d"}]',
+  '{"a":[],"c": {}, "b": true}',
+  '[[[["foo"]]]]',
 
   // // escaping
   // '["\\\\\\"\\"a\\""]',
