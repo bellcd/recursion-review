@@ -3,7 +3,6 @@
 
 // but you're not, so you'll write it from scratch:
 var parseJSON = function(json) {
-  debugger;
   var parseObj = function (objJSON) {
     if (objJSON === '{}') {
       return {};
@@ -16,35 +15,35 @@ var parseJSON = function(json) {
     let arrayCount = 0;
     let objCount = 0;
     // make copy of objJSON
-    let objJSONCopy = objJSON.slice();
+    let copy = objJSON.slice();
     // remove the front and back {}
-    objJSONCopy = objJSONCopy.slice(1, -1);
+    copy = copy.slice(1, -1);
     // trim whitespace
-    objJSONCopy = objJSONCopy.trim();
-    // while objJSONCopy length is greater than 0
-    while (objJSONCopy.length > 0) {
+    copy = copy.trim();
+    // while copy length is greater than 0
+    while (copy.length > 0) {
       // find the position of the first colon
-      firstColonIndex = objJSONCopy.indexOf(':');
+      firstColonIndex = copy.indexOf(':');
       // recursive call on all characters before the first colon (trimmed first), save as key
-      key = parseJSON(objJSONCopy.slice(0, firstColonIndex).trim());
+      key = parseJSON(copy.slice(0, firstColonIndex).trim());
       // remove all characters up to and including the colon
-      objJSONCopy = objJSONCopy.slice(firstColonIndex + 1);
+      copy = copy.slice(firstColonIndex + 1);
       // trim the string
-      objJSONCopy = objJSONCopy.trim();
+      copy = copy.trim();
       // if double quotes next (ie, value is a string)
-      if (objJSONCopy[0] === '"') {
+      if (copy[0] === '"') {
         // find position of the first comma after the next non escaped double quotes
         do {
-          position = objJSONCopy.indexOf('"', 1);
-        } while (objJSONCopy[position - 1] === '\\');
+          position = copy.indexOf('"', 1);
+        } while (copy[position - 1] === '\\');
         // position is currently the last quote of the string, so increment to the next character (the comma)
         position = position + 1;
-      } else if (objJSONCopy[0] === '[') {
+      } else if (copy[0] === '[') {
         // value is an arr
         ++arrayCount;
         position = 1;
         do {
-          switch (objJSONCopy[position]) {
+          switch (copy[position]) {
           case '[':
             ++arrayCount;
             break;
@@ -59,13 +58,13 @@ var parseJSON = function(json) {
             break;
           }
           ++position;
-        } while ((arrayCount > 0 || objCount > 0 ) && position < objJSONCopy.length);
-      } else if (objJSONCopy[0] === '{') {
+        } while ((arrayCount > 0 || objCount > 0 ) && position < copy.length);
+      } else if (copy[0] === '{') {
         // value is an obj
         ++objCount;
         position = 1;
         do {
-          switch (objJSONCopy[position]) {
+          switch (copy[position]) {
           case '[':
             ++arrayCount;
             break;
@@ -80,24 +79,23 @@ var parseJSON = function(json) {
             break;
           }
           ++position;
-        } while ((arrayCount > 0 || objCount > 0 ) && position < objJSONCopy.length);
+        } while ((arrayCount > 0 || objCount > 0 ) && position < copy.length);
       } else {
         // else find the position of the next comma
-        position = objJSONCopy.indexOf(',');
+        position = copy.indexOf(',');
         if (position === -1) {
           // this is the last key:value pair, so set position to the str length
-          position = objJSONCopy.length;
+          position = copy.length;
         }
       }
       // set value to the result of a recursive call on the next value portion 
-      value = parseJSON(objJSONCopy.slice(0, position));
+      value = parseJSON(copy.slice(0, position));
       // remove everything in the string up to and including position
-      objJSONCopy = objJSONCopy.slice(position + 1);
+      copy = copy.slice(position + 1);
 
       // add the key:value pair to the result object
       result[key] = value;
     }
-    
     return result;
   };
 
@@ -106,18 +104,103 @@ var parseJSON = function(json) {
       return [];
     }
     // make copy and remove square brackets from beginning and end
-    arrJSON = arrJSON.slice(1, -1);
+    let copy = arrJSON.slice(1, -1);
+
+    let result = [];
+    let arrayCount = 0;
+    let objCount = 0;
+    let value;
+    let position;
     
-    // split string on commas to create an actual array
-    const arrOfValues = arrJSON.split(',');
-    // return reduction of recursive calls through array
-    return arrOfValues.reduce((acc, currentValue) => {
-      // trim the currentValue
-      currentValue = currentValue.trim();
-      // push each cb return value onto accumulator array
-      acc.push(parseJSON(currentValue));
-      return acc;
-    }, []);
+    while (copy.length > 0) {
+      // // find the position of the first colon
+      // firstColonIndex = copy.indexOf(':');
+      // // recursive call on all characters before the first colon (trimmed first), save as key
+      // key = parseJSON(copy.slice(0, firstColonIndex).trim());
+      // // remove all characters up to and including the colon
+      // copy = copy.slice(firstColonIndex + 1);
+      // // trim the string
+      // copy = copy.trim();
+
+      // if double quotes next (ie, value is a string)
+      if (copy[0] === '"') {
+        // find position of the first comma after the next non escaped double quotes
+        do {
+          position = copy.indexOf('"', 1);
+        } while (copy[position - 1] === '\\');
+        // position is currently the last quote of the string, so increment to the next character (the comma)
+        position = position + 1;
+      } else if (copy[0] === '[') {
+        // value is an arr
+        ++arrayCount;
+        position = 1;
+        do {
+          switch (copy[position]) {
+          case '[':
+            ++arrayCount;
+            break;
+          case '{':
+            ++objCount;
+            break;
+          case ']':
+            --arrayCount;
+            break;
+          case '}':
+            --objCount;
+            break;
+          }
+          ++position;
+        } while ((arrayCount > 0 || objCount > 0 ) && position < copy.length);
+      } else if (copy[0] === '{') {
+        // value is an obj
+        ++objCount;
+        position = 1;
+        do {
+          switch (copy[position]) {
+          case '[':
+            ++arrayCount;
+            break;
+          case '{':
+            ++objCount;
+            break;
+          case ']':
+            --arrayCount;
+            break;
+          case '}':
+            --objCount;
+            break;
+          }
+          ++position;
+        } while ((arrayCount > 0 || objCount > 0 ) && position < copy.length);
+      } else {
+        // else find the position of the next comma
+        position = copy.indexOf(',');
+        if (position === -1) {
+          // this is the last key:value pair, so set position to the str length
+          position = copy.length;
+        }
+      }
+      // set value to the result of a recursive call on the next value portion 
+      value = parseJSON(copy.slice(0, position));
+      // remove everything in the string up to and including position
+      copy = copy.slice(position + 1);
+
+      // push value to result
+      result.push(value);
+    }
+
+    return result;
+
+    // // split string on commas to create an actual array ???doesn't work if there are nested arrays / objects???
+    // const arrOfValues = arrJSON.split(',');
+    // // return reduction of recursive calls through array
+    // return arrOfValues.reduce((acc, currentValue) => {
+    //   // trim the currentValue
+    //   currentValue = currentValue.trim();
+    //   // push each cb return value onto accumulator array
+    //   acc.push(parseJSON(currentValue));
+    //   return acc;
+    // }, []);
     
   };
   
@@ -126,7 +209,58 @@ var parseJSON = function(json) {
   };
   
   var parseStr = function (strJSON) {
-    return strJSON.slice(1, -1);
+    let copy = strJSON.slice(1, -1);
+    return copy;
+
+    // how to deal with escaped characters??
+
+    // let needToTest = false;
+    // let replaceWith;
+    // for (let i = 0; i < copy.length; i++) {
+    //   needToTest = false;
+    //   switch (copy[i]) {
+    //     case "'":
+    //     needToTest = true;
+    //     replaceWith = "'";
+    //     break;
+    //     case '"':
+    //     needToTest = true;
+    //     replaceWith = '"';
+    //     break;
+    //     case '\\':
+    //     needToTest = true;
+    //     replaceWith = '\\';
+    //     break;
+    //     case 'n':
+    //     needToTest = true;
+    //     replaceWith = `\n`;
+    //     break;
+    //     case 'r':
+    //     needToTest = true;
+    //     replaceWith = '\r';
+    //     break;
+    //     case 'v':
+    //     needToTest = true;
+    //     replaceWith = '\v';
+    //     break;
+    //     case 't':
+    //     needToTest = true;
+    //     replaceWith = '\t';
+    //     break;
+    //     case 'b':
+    //     needToTest = true;
+    //     replaceWith = '\b';
+    //     break;
+    //     case 'f':
+    //     needToTest = true;
+    //     replaceWith = '\f';
+    //     break;
+    //   }
+    //   if (needToTest && copy[i - 1] === '\\') {
+    //     copy = copy.slice(0, i - 1) + replaceWith + copy.slice(i + 1);
+    //   }
+    // }
+    // return copy;
   };
 
   var parseBoolean = function (strJSON) {
@@ -137,7 +271,6 @@ var parseJSON = function(json) {
     return null;
   };
 
-  debugger;
   if (json.length === 0) {
     // empty string
     return '';
