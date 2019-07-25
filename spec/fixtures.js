@@ -63,15 +63,16 @@ parseableStrings = [
   // '["Here\'s a list:\n"]'
 
 
-  '["\\\\\\"\\"a\\""]' // escape characters don't seem to work (page doesn't load) when they're the first or last characters in a string ...
+  // '["\\\\\\"\\"a\\""]' // escape characters don't seem to work (page doesn't load) when they're the first or last characters in a string ...
 
   // MY OWN TEST
   // '["\\r"]', ??
   // '["\\t"]',
   // '["\\\\"]',
-  // '["howdy!\\"this is on a new line!"]',
-  // '["h\\\\ihe\\\\ll\\\\o"]'
-  // '["a\\\\good"]',
+  '["howdy!\\r"this is on a new line!"]',
+  '["h\\\\ihe\\\\ll\\\\o"]',
+  '["\\\\ihe\\\\ll\\\\o"]',
+  '["a\\\\good"]',
 
   // '["and you can\'t escape thi\s"]',
 

@@ -3,7 +3,7 @@
 
 // but you're not, so you'll write it from scratch:
 var parseJSON = function(json) {
-  debugger;
+  // debugger;
   var parseObj = function (objJSON) {
     if (objJSON === '{}') {
       return {};
@@ -209,45 +209,45 @@ var parseJSON = function(json) {
     // only handling characters in English
     let result = '';
    
-    // while (copy.length > 0) {
-    //   if (copy.slice(0, 2) === '\\\\') {
-    //     // \
-    //     result = result + '\\';
-    //     console.log('copy.length: ', copy.length);
-    //     copy = copy.slice(2);
-    //     console.log('copy.length: ', copy.length);
-    //     console.log('entering');
-    //   } else if (copy.slice(0, 2) === '\\"') {
-    //     // "
-    //     result = result + '"'
-    //     copy = copy.slice(2);
-    //   } else if (copy.slice(0, 2) === "\\'") {
-    //     // '
-    //     result = result + "'";
-    //     copy = copy.slice(2);
-    //   } else if (copy.slice(0, 2) === '\\/') {
-    //     // /
-    //     result = result + '/';
-    //   } else if (copy.slice(0, 2) === '\\b') {
-    //     // backspace
-    //     result = result + '\\b';
-    //   } else if (copy.slice(0, 2) === '\\f') {
-    //     // formfeed
-    //     result = result + '\\f';
-    //   } else if (copy.slice(0, 2) === '\\n') {
-    //     // linefeed
-    //     result = result + '\\n';
-    //   } else if (copy.slice(0, 2) === '\\r') {
-    //     // carriage return
-    //     result = result + '\\r';
-    //   } else if (copy.slice(0, 2) === '\\t') {
-    //     // horizontal tab
-    //     result = result + '\\t';
-    //   } else {
-    //     result = result + copy.slice(0, 1);
-    //     copy = copy.slice(1);
-    //   }
-    // }
+    while (copy.length > 0) {
+      if (copy.slice(0, 2) === '\\\\') {
+        // \
+        result = result + '\\';
+        console.log('copy.length: ', copy.length);
+        copy = copy.slice(2);
+        console.log('copy.length: ', copy.length);
+        console.log('entering');
+      } else if (copy.slice(0, 2) === '\\"') {
+        // "
+        result = result + '"';
+        copy = copy.slice(2);
+      } else if (copy.slice(0, 2) === "\\'") {
+        // '
+        result = result + "'";
+        copy = copy.slice(2);
+      } else if (copy.slice(0, 2) === '\\/') {
+        // /
+        result = result + '/';
+      } else if (copy.slice(0, 2) === '\\b') {
+        // backspace
+        result = result + '\\b';
+      } else if (copy.slice(0, 2) === '\\f') {
+        // formfeed
+        result = result + '\\f';
+      } else if (copy.slice(0, 2) === '\\n') {
+        // linefeed
+        result = result + '\\n';
+      } else if (copy.slice(0, 2) === '\\r') {
+        // carriage return
+        result = result + '\\r';
+      } else if (copy.slice(0, 2) === '\\t') {
+        // horizontal tab
+        result = result + '\\t';
+      } else {
+        result = result + copy.slice(0, 1);
+        copy = copy.slice(1);
+      }
+    }
     return result;
   };
 
