@@ -129,3 +129,26 @@ unparseableStrings = [
   '["foo", "bar"',
   '["foo", "bar\\"]'
 ];
+
+// used for webCrawler
+var validURLs = [
+  'https://www.chaijs.com',
+  'http://lifehacker.com',
+  'https://www.npr.org/sections/news/',
+  'HTTP://www.wikipedia.org/',
+  'HTTPS://www.wikipedia.org/'
+];
+
+var invalidURLs = [
+  1,
+  null,
+  undefined,
+  {},
+  [],
+  NaN,
+  0,
+  'ttps://www.chaijs.com',
+  'htt://lifehacker.com',
+  'https//www.npr.org/sections/news/',
+  'HTTP:/www.wikipedia.org/'
+];
