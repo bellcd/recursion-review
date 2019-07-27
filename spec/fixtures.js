@@ -132,6 +132,7 @@ unparseableStrings = [
 
 // used for webCrawler
 var validURLs = [
+  'https://randomuser.me/',
   'https://www.chaijs.com',
   'http://lifehacker.com',
   'https://www.npr.org/sections/news/',
