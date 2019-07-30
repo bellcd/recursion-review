@@ -6,9 +6,7 @@
 // But instead we're going to implement it from scratch:
 // breadth first recursion, moving any child elements that need to be recursed over in the the next node to be recursed
 // not using any additional parameters (how to do this without again flag??)
-var getElementsByClassNameMovingNodes = function(className, elem = document.body, again = false) {
-  debugger;
-
+var getElementsByClassNameMovingNodes = function(className, elem = document.body.cloneNode(true), again = false) {
   // if it's the first time invoking on this node AND if current node has the target class, current is an array of that element.
   // else, an empty array
   let current = !again && elem.classList.contains(className) ? [elem] : [];
@@ -29,7 +27,7 @@ var getElementsByClassNameMovingNodes = function(className, elem = document.body
     } else if (childElements.length > 1) {
       // there's more than 1 child node that needs to be recursed over
       // if any children of the first child need to be recursed over, move them to the second child node
-      const firstChildNodeChildrenToRecurseOver = Array.from(childElements[0]).filter(elem => elem.nodeType === 1);
+      const firstChildNodeChildrenToRecurseOver = Array.from(childElements[0].childNodes).filter(elem => elem.nodeType === 1);
       if (firstChildNodeChildrenToRecurseOver.length > 0) {
         childElements[1].append(...firstChildNodeChildrenToRecurseOver); // does .append() use iteration under the hood?
       }
