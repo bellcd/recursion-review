@@ -4,6 +4,8 @@
 // };
 
 // But instead we're going to implement it from scratch:
+
+// using iteration inside the recursive function
 var getElementsByClassName = function(className, elem) {
   let result = [];
   if (elem === undefined) {
@@ -18,7 +20,7 @@ var getElementsByClassName = function(className, elem) {
   const childElements = Array.from(elem.childNodes).filter(elem => elem.nodeType === 1);
   if (childElements.length > 0) {
     arrayToAdd = childElements.reduce((acc, currentValue) => {
-      return acc.concat(getElementsByClassName(className, currentValue));  
+      return acc.concat(getElementsByClassName(className, currentValue));
     }, []);
   }
   return result.concat(arrayToAdd);
